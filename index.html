@@ -19,19 +19,34 @@
 <body>
   <div id="navBar">
     <div class="navbarChild">Dishes</div>
-    <div class="navbarChild iconContainer"> <i class="fas fa-sun iconContainer" id="themeToggler">O</i></div>
+    <div class="navbarChild iconContainer" id="themeTogglerBox">
+      <i class="fas fa-sun">
+      </i>
+    </div>
   </div>
   <div id="dishesInputBox">
     <input type="text" name="dishesInput" placeholder="Search about any dish..." id="dishesInput">
-    <div id="searchButton">Q</div>
+    <div id="searchButton">
+      <i class="fas fa-search"></i>
+    </div>
   </div>
+  
+  <!-- searched resultssssssss -->
+  <div id="searchedResults">
+  
+  </div>
+ <!-- search selected -->
   <div id="dishRecipeBox">
     <img id="dishImg" src="/assets/biryani.png">
     <div id="dishRecipeHeader">
       <div class="dishRecipeHeaderChild">
         <p id="selectedDishName">Biryani</p>
       </div>
-      <div id="closeButton" class="dishRecipeHeaderChild iconContainer">X</div>
+      <div id="closeButton"
+      class="dishRecipeHeaderChild iconContainer">
+        <i class="fas fa-times" id="">
+        </i>
+      </div>
     </div>
     <div id="dishDiscriptionBox">
       tasty biriyani veryyy beryy ummwah kissii ayan is gay
@@ -39,10 +54,10 @@
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem error quasi rerum, voluptatum mollitia pariatur dolor hic nemo ipsam consequuntur assumenda maxime ratione vitae, magnam atque iste exercitationem officia at!
     </div>
   </div>
-    <div id="dishMenu">
+  <div id="dishMenu">
     <div id="dishMenuHeader">recommended dishes:
     </div>
-
+    
   </div>
   <script src="main.js"></script>
 </body>

@@ -5,7 +5,9 @@
   color: #F7A072;
   user-select: none;
 }
-
+.hidden{
+  display: none;
+}
 body {
   background-color: #0FA3B1;
   display: flex;
@@ -81,6 +83,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  border-bottom: 1px solid black;
 }
 
 
@@ -100,53 +103,118 @@ body {
 #selectedDishName {
   background: rgba(0, 0, 0, 0.6);
   padding: 4px;
+  backdrop-filter: blur(2px);
 }
 #dishDiscriptionBox {
   background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(2px);
   padding: 8px;
 }
 #dishMenu {
   width: 80%;
-  border: 2px solid black;
   margin-top: 3em;
+  border: 2px solid black;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 #dishMenuHeader {
   margin: 0.6em 4px;
   height: 2em;
-  width: 100%;
+  width: auto;
   box-sizing: border-box;
-  
+  border-bottom: 1px solid black;
 }
 .dishCard {
   position: relative;
   width: 100%;
   height: auto;
   min-height: 5em;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  
+  border-bottom: 2px solid black;
+  box-sizing: border-box;
 }
-
 .dishCardHeader {
   position: absolute;
-  top: 0;
-  width: 100%;
-  height: 3em;
+  top: 5px;
+  width: auto;
+  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 5px;
   box-sizing: border-box;
   z-index: 2;
-  border: 1px solid black;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px;
+  backdrop-filter: blur(2px);
+  margin-left: 4px;
 }
 .recommendedDishImg{
   width: 100%;
   height: auto;
   display: block;
+  object-fit: cover;
 }
+ /* second */
+ #searchedResults{
+   width: 80%;
+  border: 2px solid black;
+  margin-top: 3em;
+ }
+ .searchedDishName{
+   margin: 0.6em 4px;
+  height: 2em;
+  width: 100%;
+  box-sizing: border-box;
+ }
+ 
+.listedDishCard {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 5em;
+  border-top: 1px solid black;
+  border-bottom: 2px solid black;
+  
+}
+
+.listedDishName {
+  position: absolute;
+  top: 5px;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  box-sizing: border-box;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px;
+  backdrop-filter: blur(2px);
+  margin-left: 4px;
+}
+.listedImgDish{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+/* .dishCard {
+  position: relative;
+}
+
+.dishCardImg {
+  width: 100%;
+  height: 150px;
+  display: block;
+}
+
+.dishCardHeader {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+} */
 /* background-image: url(/assets/biryani.png);
   background-size: cover;
   background-position: center; */

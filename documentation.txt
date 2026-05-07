@@ -1,0 +1,110 @@
+TheMealDB API Quick Notes
+=========================
+
+Base URL:
+https://www.themealdb.com/api/json/v1/1/
+
+-----------------------------------
+
+1. Search meal by name
+Endpoint:
+search.php?s=
+
+Example:
+https://www.themealdb.com/api/json/v1/1/search.php?s=biryani
+
+JS:
+fetch(searchUrl + "biryani")
+
+-----------------------------------
+
+2. Get random meal
+Endpoint:
+random.php
+
+Example:
+https://www.themealdb.com/api/json/v1/1/random.php
+
+JS:
+fetch(randomUrl)
+
+-----------------------------------
+
+3. Lookup full meal details by ID
+Endpoint:
+lookup.php?i=
+
+Example:
+https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772
+
+JS:
+fetch(lookupUrl + mealId)
+
+-----------------------------------
+
+4. Filter meals by category
+Endpoint:
+filter.php?c=
+
+Example:
+https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
+
+-----------------------------------
+
+5. Filter meals by area/country
+Endpoint:
+filter.php?a=
+
+Example:
+https://www.themealdb.com/api/json/v1/1/filter.php?a=Indian
+
+-----------------------------------
+
+Useful Response Data
+(API usually returns data.meals)
+
+Example:
+data.meals[0]
+
+Useful properties:
+
+strMeal
+-> Meal name
+
+strMealThumb
+-> Meal image URL
+
+strInstructions
+-> Recipe / instructions
+
+idMeal
+-> Meal ID
+
+-----------------------------------
+
+Example Fetch
+
+fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+.then((response) => response.json())
+.then((data) => {
+   console.log(data.meals[0]);
+});
+
+-----------------------------------
+
+Useful Pattern
+
+Search:
+search.php?s=foodName
+
+Lookup by ID:
+lookup.php?i=mealId
+
+Random:
+random.php
+
+Category:
+filter.php?c=categoryName
+
+Area:
+filter.php?a=countryName
