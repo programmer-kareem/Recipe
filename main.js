@@ -64,16 +64,17 @@ searchResultsDisplayer.style.display = "none";
 
 function searchFunction() {
   let searchedQuery = dishSearchInput.value.trim().toLowerCase();
-  let searchedDishAPI = API + searchedQuery;
   if (searchedQuery != "") {
     searchResultsDisplayer.style.display = "";
+    let searchedDishAPI = API + searchedQuery;
     fetch(searchedDishAPI)
       .then((response) => response.json())
       .then((data) => {
         console.log(data.meals);
         //error detection 
         if (data.meals != null) {
-                    //dish list name header
+          console.log(data.meals)
+          //dish list name header
           let searchedListDishNameDisplayer = document.createElement("div");
           searchedListDishNameDisplayer.classList.add("searchedDishName");
           searchedListDishNameDisplayer.innerText = searchedQuery[0].toUpperCase() + searchedQuery.slice(1);
@@ -83,7 +84,7 @@ function searchFunction() {
             searchResultsDishCard.classList.add("listedDishCard");
             searchResultsDishCard.dataset.id = data.meals[i].idMeal;
             searchResultsDisplayer.appendChild(searchResultsDishCard);
-
+            
             //dish name header
             let listedDishName = document.createElement("div");
             listedDishName.classList.add("listedDishName");
@@ -106,3 +107,18 @@ function searchFunction() {
   }
 }
 DishSearcherButton.onclick = searchFunction;
+
+function displaydishdescription(idMeal) {
+  let chosenDishIdAPI = "https://www.themealdb.com/api/json/v1/1/filter.php?i="+idMeal;
+  fetch(chosenDishIdAPI)
+    .then((response) => response.json())
+    .then((data) => {
+      //display chosen dish
+      //dish name
+      searchedDishNameDisplayer.innerText=data.meals[0].strMeal
+      //dish description
+      searchedDishDescriptionDisplayer.innerText=data.meals[0].strInstruction;
+      //dish image
+      searchedDishImgDisplayer.src=data.meals[0].strMealThumb;
+    });
+}
