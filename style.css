@@ -5,9 +5,7 @@
   color: #F7A072;
   user-select: none;
 }
-.hidden{
-  display: none;
-}
+
 body {
   background-color: #0FA3B1;
   display: flex;
@@ -206,6 +204,9 @@ body {
   height: auto;
   display: block;
   object-fit: cover;
+}
+.hidden{
+  display: none;
 }
 /* .dishCard {
   position: relative;
