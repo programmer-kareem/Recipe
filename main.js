@@ -13,7 +13,7 @@ let API = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 
 //removing searched dish card on clicking close button and also clearing search box
 searchedDishCardCloseButton.onclick = () => {
-  dishRecipeBox.classList.toggle("hidden");
+  searchedDishRecipeBox.classList.add("hidden");
   dishSearchInput.value = "";
 }
 
@@ -29,7 +29,7 @@ function loadRandomDishes(data) {
   for (var i = 0; i < 10; i++) {
     
     let newRecommededDishCard = document.createElement("div");
-    newRecommededDishCard.classList.add("listedDishCard");
+    newRecommededDishCard.classList.add("dishCard");
     newRecommededDishCard.dataset.id = data.meals[i].idMeal;
     recommendedDishesMenu.appendChild(newRecommededDishCard);
     newRecommededDishCard.onclick = () => {
@@ -65,7 +65,7 @@ themeTogglerBox.onclick = () => {
   toggleTheme();
 }
 //search results displayer
-searchResultsDisplayer.style.display = "none";
+searchResultsDisplayer.classList.add("hidden");
 
 function searchFunction() {
   let searchedQuery = dishSearchInput.value.trim().toLowerCase();
@@ -79,15 +79,16 @@ function searchFunction() {
         searchResultsDisplayer.innerHTML = '';
         //error detection 
         if (data.meals != null) {
-          searchResultsDisplayer.style.display = "";
+          searchResultsDisplayer.classList.remove("hidden")
+          searchedDishRecipeBox.classList.add("hidden");
           //dish list name header
           let searchedListDishNameDisplayer = document.createElement("div");
           searchedListDishNameDisplayer.classList.add("searchedDishName");
-          searchedListDishNameDisplayer.innerText = searchedQuery[0].toUpperCase() + searchedQuery.slice(1);
+          searchedListDishNameDisplayer.innerText = searchedQuery[0].toUpperCase() + searchedQuery.slice(1) + ":";
           searchResultsDisplayer.appendChild(searchedListDishNameDisplayer);
           for (var i = 0; i < data.meals.length; i++) {
             let searchResultsDishCard = document.createElement("div");
-            searchResultsDishCard.classList.add("dishCarddishCard");
+            searchResultsDishCard.classList.add("listedDishCard");
             searchResultsDishCard.dataset.id = data.meals[i].idMeal;
             searchResultsDisplayer.appendChild(searchResultsDishCard);
             searchResultsDishCard.onclick = () => {
@@ -107,19 +108,37 @@ function searchFunction() {
             searchResultsDishCard.appendChild(listedDishImg);
           }
         } else {
-          alert("hlowww")
-          return;
+          // error box if dish not found
+          searchedDishRecipeBox.classList.remove("hidden");
+          searchResultsDisplayer.classList.add("hidden")
+          //dish name
+          searchedDishNameDisplayer.innerText = "Error, the dish '" + searchedQuery[0].toUpperCase() + searchedQuery.slice(1) + "' not found";
+          //dish description
+          searchedDishDescriptionDisplayer.innerText = "Your requested dish could not be found. Please check for any typo or misspelling in your query. If everything is alright, our database may be lacking information about your requested dish. If so, sorry for the inconvenience. try searching for another dish.";
+          //dish image
+          searchedDishImgDisplayer.src = "/assets/ERROR_DISH_NOT_FOUND.png";
         }
+      }).catch((error) => {
+        // error box if dish not found
+        searchedDishRecipeBox.classList.remove("hidden");
+        searchResultsDisplayer.classList.add("hidden")
+        //dish name
+        searchedDishNameDisplayer.innerText = "Error, Your network is disconnected";
+        //dish description
+        searchedDishDescriptionDisplayer.innerText = "You may not be connected to the internet. please check your wifi or mobile data is turned on. also make sure that the airplane mode is turned off. If the issue still goes on, try refreshing the page or contact the developer";
+        //dish image
+        searchedDishImgDisplayer.src = "/assets/ERROR_NETWORK_DISCONNECTED.png";
       });
-  } else {
-    return;
   }
 }
 DishSearcherButton.onclick = searchFunction;
+dishSearchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    searchFunction();
+  }
+});
 //chosen dish instructions 
-window.onload = () => {
-  dishRecipeBox.classList.toggle("hidden");
-}
+searchedDishRecipeBox.classList.add("hidden");
 
 function displayChosenDishDescription(idMeal) {
   let chosenDishIdAPI = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + idMeal;
@@ -127,12 +146,17 @@ function displayChosenDishDescription(idMeal) {
     .then((response) => response.json())
     .then((data) => {
       //display chosen dish
-      dishRecipeBox.classList.toggle("hidden");
+      searchedDishRecipeBox.classList.remove("hidden");
       //dish name
       searchedDishNameDisplayer.innerText = data.meals[0].strMeal
       //dish description
       searchedDishDescriptionDisplayer.innerText = data.meals[0].strInstructions;
       //dish image
       searchedDishImgDisplayer.src = data.meals[0].strMealThumb;
+      searchedDishRecipeBox.scrollIntoView({
+        behavior: "smooth"
+      });
     });
 }
+
+//category

@@ -89,21 +89,31 @@ body {
 
 #dishRecipeHeader {
   position: absolute;
-  top: 0;
+  top: 5px;
   width: 100%;
-  height: 3em;
+  height: auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 5px;
   box-sizing: border-box;
   z-index: 2;
+}
+
+#dishRecipeHeader > :last-child {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
 }
 
 #selectedDishName {
   background: rgba(0, 0, 0, 0.6);
   padding: 4px;
   backdrop-filter: blur(2px);
+  word-break: break-word;
+  flex-grow: 1;
+}
+#closeButton {
+  flex-shrink: 0;
 }
 #dishDiscriptionBox {
   background: rgba(0, 0, 0, 0.3);
@@ -171,8 +181,6 @@ body {
   position: relative;
   width: 100%;
   height: auto;
-  min-height: 5em;
-  border-top: 1px solid black;
   border-bottom: 2px solid black;
   
 }
