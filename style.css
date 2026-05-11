@@ -75,13 +75,15 @@ body {
   border: 2px solid black;
   margin-top: 2em;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
 }
 
 #dishImg {
   width: 100%;
   height: auto;
   display: block;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 
 
@@ -104,19 +106,54 @@ body {
 }
 
 #selectedDishName {
-  background: rgba(0, 0, 0, 0.6);
   padding: 4px;
-  backdrop-filter: blur(2px);
   word-break: break-word;
   flex-grow: 1;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
 }
 #closeButton {
   flex-shrink: 0;
 }
 #dishDiscriptionBox {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(2px);
   padding: 8px;
+}
+#dishIngredientsBox{
+  width: 100%;
+  border-top: 1px solid black;
+  height: auto;
+}
+#dishIngredientsBox :first-child {
+  padding-left: 4px;
+  height: auto;
+  min-height: 2em;
+  display: flex;
+  align-items: center;
+}
+.dishIngredientBox{
+  min-height: 2em;
+  border-bottom: 1px solid black;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-left: 4px;
+  height: auto;
+  box-sizing: border-box;
+  
+}
+#dishTutorialLinkBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  background-color: #FF0000;
+}
+#dishTutorialLinkBox a {
+  color: #ffffff;
+}
+#dishTutorialLinkBox i {
+  color: #ffffff;
 }
 #dishMenu {
   width: 80%;
