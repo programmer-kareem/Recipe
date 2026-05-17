@@ -25,7 +25,10 @@ function loadRandomDishes() {
         let newRecommededDishCard = document.createElement("div");
         newRecommededDishCard.classList.add("dishCard");
         newRecommededDishCard.dataset.id = data.meals[i].idMeal;
-        recommendedDishesMenu.appendChild(newRecommededDishCard);
+        recommendedDishesMenu.insertBefore(
+          newRecommededDishCard,
+          recommendedDishesMenu.lastElementChild
+        );
         let newRecommendedDishImage = document.createElement("img");
         newRecommendedDishImage.src = data.meals[i].strMealThumb;
         newRecommendedDishImage.classList.add("recommendedDishImg");
@@ -90,7 +93,8 @@ function searchFunction() {
             searchResultsDishCard.classList.add("listedDishCard");
             searchResultsDishCard.dataset.id = data.meals[i].idMeal;
             searchResultsDisplayer.appendChild(searchResultsDishCard);
-            searchResultsDishCard.onclick = () => { displayChosenDishDescription(searchResultsDishCard.dataset.id);
+            searchResultsDishCard.onclick = () => {
+              displayChosenDishDescription(searchResultsDishCard.dataset.id);
             }
             
             //dish name header
@@ -142,7 +146,7 @@ function displayChosenDishDescription(idMeal) {
         if (data.meals[0]["strIngredient" + i] != "" && data.meals[0]["strMeasure" + i] != "" && data.meals[0]["strIngredient" + i] != null && data.meals[0]["strMeasure" + i] != null) {
           let IngredientBox = document.createElement("div");
           IngredientBox.classList.add("dishIngredientBox")
-          IngredientBox.innerText ="•" + data.meals[0]["strIngredient" + i] + ": " +
+          IngredientBox.innerText = "•" + data.meals[0]["strIngredient" + i] + ": " +
             data.meals[0]["strMeasure" + i]
           dishIngredientsBox.appendChild(IngredientBox);
           //youtube tutorila link
