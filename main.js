@@ -13,15 +13,19 @@ let dishIngredientsBox = document.querySelector("#dishIngredientsBox");
 let dishTutorialLinkBox = document.querySelector("#dishTutorialLinkBox");
 let tutorialLink = document.querySelector("#tutorialLink")
 let recommendedDishesMenu = document.querySelector("#dishMenu");
+let categorySelector = document.querySelector("#dishCategorySelector");
+let category = "Vegetarian";
+let i = 0;
 let API = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 
 //random dishes loading function 
-function loadRandomDishes() {
+function loadRandomDishes(category) {
   
-  fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian")
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
     .then((response) => response.json())
     .then((data) => {
-      for (var i = 0; i < 10; i++) {
+        let limit = Math.min(i + 10, data.meals.length);
+        for (i; i < limit; i++){
         let newRecommededDishCard = document.createElement("div");
         newRecommededDishCard.classList.add("dishCard");
         newRecommededDishCard.dataset.id = data.meals[i].idMeal;
@@ -40,13 +44,18 @@ function loadRandomDishes() {
         let mealId = data.meals[i].idMeal;
         newRecommededDishCard.onclick = () => {
           displayChosenDishDescription(mealId);
+        
         }
       }
     }).catch((error) => {
-      displayNetworkError();
-    });
+  displayNetworkError();
+});
 }
 
+//load more dish function
+function loadMoreDishes(category) {
+  
+}
 //theme toggle function.. incomplete
 //currently not in use
 /*let theme = "light";
@@ -146,7 +155,7 @@ function displayChosenDishDescription(idMeal) {
         if (data.meals[0]["strIngredient" + i] != "" && data.meals[0]["strMeasure" + i] != "" && data.meals[0]["strIngredient" + i] != null && data.meals[0]["strMeasure" + i] != null) {
           let IngredientBox = document.createElement("div");
           IngredientBox.classList.add("dishIngredientBox")
-          IngredientBox.innerText = "•" + data.meals[0]["strIngredient" + i] + ": " +
+          IngredientBox.innerText = "• " + data.meals[0]["strIngredient" + i] + ": " +
             data.meals[0]["strMeasure" + i]
           dishIngredientsBox.appendChild(IngredientBox);
           //youtube tutorila link
@@ -175,8 +184,22 @@ function displayNetworkError() {
   //dish image
   searchedDishImgDisplayer.src = "/assets/ERROR_NETWORK_DISCONNECTED.png";
 }
-//category function, load more function. (pending features..)
 
+//category function, load more function. (pending features..)
+//category
+categorySelector.onchange = () => {
+  document.querySelectorAll(".dishCard").forEach((card) => {
+    card.remove();
+  });
+  i = 0;
+  category = categorySelector.value;
+  loadRandomDishes(category)
+}
+//load more
+document.querySelector("#loadMoreButtonBox").onclick = () => {
+  
+  loadRandomDishes(category);
+}
 //setting up dynamics
 
 //search button and enter button dynamic to trigger search function
@@ -195,7 +218,7 @@ searchedDishCardCloseButton.onclick = () => {
 
 //initial state
 window.onload = () => {
-  loadRandomDishes()
+  loadRandomDishes(category)
 }
 //hiding tutorial link box
 dishTutorialLinkBox.classList.add("hidden");
